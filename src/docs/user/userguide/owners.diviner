@@ -1,0 +1,70 @@
+@title Owners User Guide
+@group userguide
+
+Group files in a codebase into packages and define ownership.
+
+Overview
+========
+
+The Owners application allows you to group files in a codebase (or across
+codebases) into packages. This can make it easier to reference a module or
+subsystem in other applications, like Herald.
+
+
+Creating a Package
+==================
+
+To create a package, choose a name and add some files which belong to the
+package. For example, you might define an "iOS Application" package by
+including these paths:
+
+  /conf/ios/
+  /src/ios/
+  /shared/assets/mobile/
+
+Any files in those directories are considered to be part of the package, and
+you can now conveniently refer to them (for example, in a Herald rule) by
+refering to the package instead of copy/pasting a huge regular expression
+into a bunch of places.
+
+If new source files are later added, or the scope of the package otherwise
+expands or contracts, you can edit the package definition to keep things
+updated.
+
+You can use "exclude" paths to ignore subdirectories which would otherwise
+be considered part of the package. For example, you might exclude a path
+like this:
+
+  /conf/ios/generated/
+
+Perhaps that directory contains some generated configuration which frequently
+changes, and which you aren't concerned about.
+
+After creating a package, files the package contains will be identified as
+belonging to the package when you look at them in Diffusion, or look at changes
+which affect them in Diffusion or Differential.
+
+
+Files in Multiple Packages
+==========================
+
+Multiple packages may own the same file. For example, both the
+"Android Application" and the "iOS Application" packages might own a path
+like this, containing resources used by both:
+
+  /shared/assets/mobile/
+
+If both packages own this directory, files in the directory are considered to
+be part of both packages.
+
+Packages do not need to have claims of equal specificity to own files. For
+example, if you have a "Design Assets" package which owns this path:
+
+  /shared/assets/
+
+...it will //also// own all of the files in the `mobile/` subdirectory. In this
+configuration, these files are part of three packages: "iOS Application",
+"Android Application", and "Design Assets".
+
+(You can use an "exclude" rule if you want to make a different package with a
+more specific claim the owner of a file or subdirectory.)

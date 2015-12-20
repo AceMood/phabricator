@@ -1,0 +1,22 @@
+/**
+ * @provides diffusion-icons-css
+ */
+
+input.diffusion-clone-uri {
+  display: block;
+  width: 100%;
+}
+
+.diffusion-clone-extras {
+  font-size: 11px;
+  text-align: right;
+  color: {$lightgreytext};
+}
+
+.diffusion-browse-name {
+  margin-left: 8px;
+}
+
+.diffusion-link-icon + .diffusion-link-icon {
+  margin-left: 6px;
+}
